@@ -1,0 +1,55 @@
+﻿@model Lab_1.TP.Models.Calculator
+
+@{
+    ViewData["Title"] = "Калькулятор";
+}
+
+<h2>Калькулятор (byte и double)</h2>
+
+@using (Html.BeginForm("Index", "Calculator", FormMethod.Post))
+{
+    <div>
+        @Html.LabelFor(model => model.Operand1Input, "Операнд 1 (byte):")
+        <br />
+        @Html.TextBoxFor(model => model.Operand1Input)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Operand2Input, "Операнд 2 (double):")
+        <br />
+        @Html.TextBoxFor(model => model.Operand2Input)
+    </div>
+
+    <div>
+        @Html.LabelFor(model => model.Operation, "Операция:")
+        <br />
+        @Html.ListBoxFor(model => model.Operation,
+            new List<SelectListItem>
+            {
+                new SelectListItem { Text = "Сложение (+)", Value = "+" },
+                new SelectListItem { Text = "Вычитание (-)", Value = "-" },
+                new SelectListItem { Text = "Умножение (*)", Value = "*" },
+                new SelectListItem { Text = "Деление (/)", Value = "/" }
+            },
+            new { @class = "form-control", size = 4 })
+    </div>
+
+    <button type="submit">Вычислить</button>
+}
+
+<div>
+    <strong>Результат:</strong>
+    @if (Model != null && !double.IsNaN(Model.Result))
+    {
+        <span>@Model.Result</span>
+    }
+    else if (Model != null && double.IsNaN(Model.Result))
+    {
+        <span style="color:red;">Ошибка! Неверный ввод или деление на 0.</span>
+    }
+    else
+    {
+        <span>0</span>
+    }
+</div>
+
