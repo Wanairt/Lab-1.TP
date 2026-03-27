@@ -8,12 +8,26 @@ namespace Lab_1.TP.Models
         [HttpGet]
         public IActionResult Index()
         {
+            ViewBag.ComparisonValue = 10.5;
             return View(new Calculator());
         }
 
         [HttpPost]
-        public IActionResult Index(Calculator model)
+        public IActionResult Index(Calculator model, string button)
         {
+            if (button == "clear")
+            {
+                model.Operand1Input = null;
+                model.Operand2Input = null;
+                model.Operation = null;
+                model.Result = 0;
+                ViewBag.ComparisonValue = 10.5;
+
+                ModelState.Clear();
+
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 byte operand1;
@@ -53,6 +67,7 @@ namespace Lab_1.TP.Models
                     model.Result = double.NaN;
                 }
             }
+            ViewBag.ComparisonValue = 10.5;
             return View(model);
         }
     }

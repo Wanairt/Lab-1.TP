@@ -34,22 +34,32 @@
             new { @class = "form-control", size = 4 })
     </div>
 
-    <button type="submit">Вычислить</button>
+    <div>
+        <button type="submit" name="button" value="calculate">Вычислить</button>
+        <button type="submit" name="button" value="clear">Очистить</button>
+    </div>
 }
 
 <div>
-    <strong>Результат:</strong>
-    @if (Model != null && !double.IsNaN(Model.Result))
-    {
-        <span>@Model.Result</span>
-    }
-    else if (Model != null && double.IsNaN(Model.Result))
-    {
-        <span style="color:red;">Ошибка! Неверный ввод или деление на 0.</span>
-    }
-    else
-    {
-        <span>0</span>
-    }
+    <div>
+        <strong>Результат:</strong>
+        @if (Model != null && !double.IsNaN(Model.Result))
+        {
+            <span>@Model.Result</span>
+
+            if (Model.Result == ViewBag.ComparisonValue)
+            {
+                <p style="color: green;">✓ Результат совпадает с заданным значением (@ViewBag.ComparisonValue)!</p>
+            }
+            else
+            {
+                <p style="color: blue;">✗ Результат не совпадает с заданным значением (@ViewBag.ComparisonValue).</p>
+            }
+        }
+        else if (Model != null && double.IsNaN(Model.Result))
+        {
+            <span style="color:red;">Ошибка! Неверный ввод или деление на 0.</span>
+        }
+    </div>
 </div>
 
