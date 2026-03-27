@@ -6,18 +6,22 @@
 
 <h2>Калькулятор (byte и double)</h2>
 
+@Html.ValidationSummary(true, "", new { @class = "validation-summary-errors" })
+
 @using (Html.BeginForm("Index", "Calculator", FormMethod.Post))
 {
     <div>
         @Html.LabelFor(model => model.Operand1Input, "Операнд 1 (byte):")
         <br />
-        @Html.TextBoxFor(model => model.Operand1Input)
+        @Html.TextBoxFor(model => model.Operand1Input, new { @class = "text-box" })
+        @Html.ValidationMessageFor(model => model.Operand1Input, "", new { @class = "field-validation-error" })
     </div>
 
     <div>
         @Html.LabelFor(model => model.Operand2Input, "Операнд 2 (double):")
         <br />
-        @Html.TextBoxFor(model => model.Operand2Input)
+        @Html.TextBoxFor(model => model.Operand2Input, new { @class = "text-box" })
+        @Html.ValidationMessageFor(model => model.Operand2Input, "", new { @class = "field-validation-error" })
     </div>
 
     <div>
