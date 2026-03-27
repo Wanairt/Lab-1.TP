@@ -8,7 +8,7 @@ namespace Lab_1.TP.Models
         [Required(ErrorMessage = "Поле 'Операнд 1' обязательно для заполнения!")]
         public string? Operand1Input { get; set; }
 
-        [Compare("Operand1Input", ErrorMessage = "Значение операнда 2 должно совпадать со значением операнда 1!")]
+        [StringLength(5, MinimumLength = 1, ErrorMessage = "Операнд 2 должен содержать от 1 до 5 символов")]
         public string? Operand2Input { get; set; }
 
         public string? Operation { get; set; }
