@@ -3,6 +3,7 @@ using Lab_1.TP.Models;
 
 namespace Lab_1.TP.Models
 {
+
     public class CalculatorController : Controller
     {
         [HttpGet]
@@ -72,5 +73,14 @@ namespace Lab_1.TP.Models
             ViewBag.ComparisonValue = 10.5;
             return View(model);
         }
-    }
+    
+
+    public IActionResult ResultInfo()
+        {
+            // Данные приходят через QueryString, поэтому модель не нужна
+            // Просто возвращаем представление
+            return View();
+        }
+
+    } 
 }

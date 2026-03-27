@@ -1,0 +1,58 @@
+﻿@model Lab_1.TP.Models.Calculator
+
+@{
+    ViewData["Title"] = "Информация об операции";
+}
+
+<h2>Информация об операции</h2>
+
+@{
+    string? operand1 = Context.Request.Query["operand1"].ToString();
+    string? operand2 = Context.Request.Query["operand2"].ToString();
+    string? operation = Context.Request.Query["operation"].ToString();
+    string? result = Context.Request.Query["result"].ToString();
+}
+
+@if (!string.IsNullOrEmpty(operand1) &&
+     !string.IsNullOrEmpty(operand2) &&
+     !string.IsNullOrEmpty(operation) &&
+     !string.IsNullOrEmpty(result))
+{
+    string expression = $"{operand1} {operation} {operand2} = {result}";
+    
+    int equalIndex = expression.IndexOf('=');
+    
+    if (equalIndex > 0)
+    {
+        expression = expression.Remove(equalIndex, 1);
+        expression = expression.Insert(equalIndex, "равно");
+    }
+    
+    <div style="font-size: 20px; font-weight: bold; margin: 20px 0; padding: 15px; background-color: #f0f0f0; border-radius: 5px;">
+        @expression
+    </div>
+}
+else
+{
+    <p style="color: red;">Данные об операции не переданы. Вернитесь на главную страницу и выполните вычисление.</p>
+}
+
+<div>
+    <a href="@Url.Action("Index", "Calculator")" class="btn-back">← Вернуться к калькулятору</a>
+</div>
+
+<style>
+    .btn-back {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 8px 16px;
+        background-color: #6c757d;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+    }
+
+        .btn-back:hover {
+            background-color: #5a6268;
+        }
+</style>

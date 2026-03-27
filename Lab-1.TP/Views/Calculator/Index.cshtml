@@ -59,10 +59,32 @@
             {
                 <p style="color: blue;">✗ Результат не совпадает с заданным значением (@ViewBag.ComparisonValue).</p>
             }
+
         }
         else if (Model != null && double.IsNaN(Model.Result))
         {
             <span style="color:red;">Ошибка! Неверный ввод или деление на 0.</span>
+        }
+        @if (Model != null &&
+     !string.IsNullOrEmpty(Model.Operand1Input) &&
+     !string.IsNullOrEmpty(Model.Operand2Input) &&
+     !string.IsNullOrEmpty(Model.Operation))
+        {
+            <div style="margin-top: 15px;">
+                @Html.ActionLink("Подробнее об операции", "ResultInfo", "Calculator",
+                    new
+                    {
+                        operand1 = Model.Operand1Input,
+                        operand2 = Model.Operand2Input,
+                        operation = Model.Operation,
+                        result = Model.Result
+                    },
+                    new { @class = "btn-details" })
+            </div>
+        }
+        else if (Model != null && double.IsNaN(Model.Result))
+        {
+        <span style="color:red;">Ошибка! Неверный ввод или деление на 0.</span>
         }
     </div>
 </div>
